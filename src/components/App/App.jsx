@@ -1,10 +1,9 @@
-import Phonebook from "components/Phonebook";
-import css from './app.module.css';
+import Phonebook from 'components/Phonebook';
 
 export const App = () => {
   return (
-    <div className={css.container}>
-	 <Phonebook />
-    </div>
+    <>
+      <Phonebook />
+    </>
   );
 };

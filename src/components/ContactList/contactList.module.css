@@ -1,18 +1,17 @@
-.label {
-  display: block;
-  margin-bottom: 10px;
+.items {
+  list-style: none;
+  padding: 0;
 }
-.input {
-  display: block;
-  width: 100%;
-  margin-bottom: 30px;
-  border: 1px solid black;
-  border-radius: 20px;
-  padding: 10px;
+.item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed black;
 }
 .button {
-  margin: 10px 0 20px;
-  padding: 10px 15px;
+  align-items: flex-end;
+  margin-left: 5px;
+  padding: 5px 10px;
   border: 1px solid black;
   border-radius: 20px;
   cursor: pointer;
