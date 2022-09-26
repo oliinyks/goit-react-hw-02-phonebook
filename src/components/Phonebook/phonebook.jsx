@@ -1,59 +1,54 @@
 import React from 'react';
+import Form from 'components/Form';
+import { nanoid } from 'nanoid'
+import Notiflix from 'notiflix';
 import css from './phonebook.module.css';
-// import { render } from "react-dom";
 
 class Phonebook extends React.Component {
   state = {
     contacts: [],
-    name: '',
-    number: '',
+	 visible: false,
   };
 
-  handleInputChange = event => {
-    this.setState({ name: event.target.value });
+  formSubmitHandler = ({name, number}) => {
+	const newContact = {
+		id: nanoid(),
+		name,
+		number,
+	};
+	this.setState(({contacts})=> ({
+		contacts: [...contacts, newContact],
+		visible: true
+	}))
+	Notiflix.Notify.success('You have just created a new contact');
+  }
+
+  deleteContact = contactId => {
+	this.setState(prevState => ({
+		contacts: prevState.contacts.filter(({id} )=> id !== contactId),
+	}));
   };
 
   render() {
-	const name = this.state;
-	const number = this.state;
+	const {contacts} = this.state;
+	const {visible} = this.state;
 
     return (
       <section className={css.phonebook}>
         <h1 className={css.title}>Your amazing phonebook</h1>
-
-        <label className={css.label} htmlFor="user_name">
-          Name
-        </label>
-        <input
-          className={css.input}
-          type="text"
-          value={name}
-          onChange={this.handleInputChange}
-          name="name"
-          id="user_name"
-          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-          required
-        />
-
-        <label className={css.label} htmlFor="user_number">Number</label>
-        <input
-		   className={css.input}
-          type="tel"
-			 value={number}
-          onChange={this.handleInputChange}
-          name="number"
-			 id='user_number'
-          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-          required
-        />
-
-        <button className={css.button} type="button">
-          Add contact
-        </button>
+        <Form onSubmit={this.formSubmitHandler}/>
         <h2 className={css.subtitle}>Contacts</h2>
-        <p className={css.text}>You have no contacts</p>
+       {visible
+		 ?  <ul className={css.items}>{contacts.map(({id, name, number}) => 
+		 <li className={css.item} key={id}>
+			<p>&#9734; {name}: {number}</p>
+			<button 
+			className={css.button} 
+			type='button' 
+			onClick={() => this.deleteContact(id)}>Delete</button>
+			</li>)}</ul>
+		 : <p className={css.text}>You have no contacts</p>
+		 }
       </section>
     );
   }
