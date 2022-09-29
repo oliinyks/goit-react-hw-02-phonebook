@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './filter.module.css';
 
@@ -18,4 +19,10 @@ const Filter = ({ filter, onFilterChange }) => (
     />
   </>
 );
+
+Filter.propTypes = {
+	filter:  PropTypes.string,
+	onFilterChange: PropTypes.func.isRequired,
+};
+
 export default Filter;
