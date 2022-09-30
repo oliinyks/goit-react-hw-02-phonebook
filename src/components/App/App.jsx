@@ -22,9 +22,9 @@ class App extends React.Component {
     };
 
     const filter = this.state.contacts.filter(
-      ({ name }) => name.toLowerCase() === newContact.name
+      ({ name }) => name.toLowerCase() === newContact.name.toLowerCase()
     );
-
+	 
     if (filter.length) {
       Notiflix.Notify.failure('You already have a contact with that name');
       return;
