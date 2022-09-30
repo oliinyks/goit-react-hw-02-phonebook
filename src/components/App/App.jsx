@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import Notiflix from 'notiflix';
 
@@ -87,7 +86,4 @@ class App extends React.Component {
     );
   }
 }
-App.protoTypes = {
-  visible: PropTypes.bool.isRequired,
-};
 export default App;

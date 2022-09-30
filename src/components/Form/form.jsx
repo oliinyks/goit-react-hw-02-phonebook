@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { nanoid } from 'nanoid';
 import css from './form.module.css';
 
@@ -70,10 +69,4 @@ class Form extends Component {
     );
   }
 }
-
-Form.propTypes = {
-	name: PropTypes.string,
-	number: PropTypes.string,
-};
-
 export default Form;
